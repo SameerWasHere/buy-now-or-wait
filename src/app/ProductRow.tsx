@@ -2,6 +2,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image'; // Import Image from next/image
 
 type ProductRowProps = {
   name: string;
@@ -32,7 +33,13 @@ const ProductRow: React.FC<ProductRowProps> = ({
       <div style={rowStyles}>
         {/* Section 1: Product Image */}
         <div style={sectionStylesLeftAligned}>
-          <img src={imageUrl || 'default-image.jpg'} alt={name} style={imageStyles} />
+          <Image
+            src={imageUrl || '/default-image.jpg'} // Use Image component
+            alt={name}
+            width={100} // Define width for optimization
+            height={100} // Define height for optimization
+            style={imageStyles}
+          />
         </div>
 
         {/* Section 2: Released Information */}
@@ -114,8 +121,6 @@ const productNameStyle: React.CSSProperties = {
 };
 
 const imageStyles: React.CSSProperties = {
-  width: '100%',
-  height: '100px',
   objectFit: 'contain',
   alignSelf: 'flex-start',
 };
@@ -150,7 +155,7 @@ const getStatusColor = (status: string): string => {
 };
 
 const responsiveButtonStyle = (status: string): React.CSSProperties => {
-  let backgroundColor = getStatusColor(status);
+  const backgroundColor = getStatusColor(status); // Use 'const' instead of 'let'
   return {
     backgroundColor,
     color: 'white',
@@ -171,6 +176,7 @@ const statusButtonContainerStyle: React.CSSProperties = {
 };
 
 export default ProductRow;
+
 
 
 
