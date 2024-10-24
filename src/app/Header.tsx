@@ -45,17 +45,21 @@ const headerStyles: React.CSSProperties = {
 
 const titleStyles: React.CSSProperties = {
   margin: 0,
-  fontSize: '1.5rem',
+  fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', // Responsive font size
+  whiteSpace: 'nowrap',
+  flexShrink: 0, // Prevents shrinking of the title
 };
 
 const searchContainerStyles: React.CSSProperties = {
-  flexGrow: 1,
+  flexGrow: 1, // Allows the search bar to grow and fill available space
   display: 'flex',
   justifyContent: 'flex-end',
+  marginLeft: '10px', // Space between title and search bar
 };
 
 const searchInputStyles: React.CSSProperties = {
-  width: '50%',
+  width: '100%', // Takes full available width
+  maxWidth: '400px', // Limits max width for better layout
   padding: '10px',
   borderRadius: '5px',
   border: '1px solid #ccc',

@@ -48,11 +48,14 @@ const Page: React.FC = () => {
   return (
     <>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <main style={{
+      <main
+        style={{
+          backgroundColor: '#f7f7f7', // Set a light background for the main content
           paddingTop: '80px', // Adjusted padding to account for header height
           paddingRight: '20px',
           paddingBottom: '20px',
           paddingLeft: '20px',
+          minHeight: '100vh', // Ensure it covers full viewport height
         }}
       >
         {filteredProducts.map((product) => {
