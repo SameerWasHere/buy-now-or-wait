@@ -41,21 +41,23 @@ const Page: React.FC = () => {
     return Math.floor((today.getTime() - release.getTime()) / (1000 * 60 * 60 * 24));
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = products
+    .filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(0, 10); // Limit to 10 rows
 
   return (
     <>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <main
         style={{
-          backgroundColor: '#f7f7f7', // Set a light background for the main content
-          paddingTop: '80px', // Adjusted padding to account for header height
+          backgroundColor: '#f7f7f7',
+          paddingTop: '80px',
           paddingRight: '20px',
           paddingBottom: '20px',
           paddingLeft: '20px',
-          minHeight: '100vh', // Ensure it covers full viewport height
+          minHeight: '100vh',
         }}
       >
         {filteredProducts.map((product) => {
@@ -103,5 +105,6 @@ const calculateStatus = (
 };
 
 export default Page;
+
 
 
