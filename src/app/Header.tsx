@@ -135,7 +135,7 @@ const headerStyles: React.CSSProperties = {
   top: 0,
   left: 0,
   width: '100%',
-  backgroundColor: 'rgba(16, 16, 16, 0.9)', // Darker grey with transparency
+  backgroundColor: 'rgba(16, 16, 16, 0.9)',
   color: 'white',
   padding: '10px 20px',
   zIndex: 1000,
@@ -149,7 +149,7 @@ const headerContentStyles: React.CSSProperties = {
 
 const titleStyles: React.CSSProperties = {
   margin: 5,
-  fontSize: 'clamp(.7rem, 3vw, 1.5rem)',
+  fontSize: 'clamp(.75rem, 3vw, 1.5rem)',
   fontWeight: 'bold',
   whiteSpace: 'nowrap',
   flexShrink: 0,
@@ -182,7 +182,7 @@ const filterButtonContainerStyles: React.CSSProperties = {
 
 const filterButtonStyles: React.CSSProperties = {
   padding: '4px 10px',
-  backgroundColor: 'rgba(16, 16, 16, 0.9)', // Match header background color
+  backgroundColor: 'rgba(16, 16, 16, 0.9)', 
   color: 'white',
   border: 'none',
   borderRadius: '4px',
@@ -190,13 +190,12 @@ const filterButtonStyles: React.CSSProperties = {
   fontSize: '0.9rem',
 };
 
-
 const filterDropdownStyles: React.CSSProperties = {
   position: 'absolute',
   top: '100%',
   left: 0,
   right: 0,
-  backgroundColor: 'rgba(16, 16, 16, 0.9)', // Same color as header with transparency
+  backgroundColor: 'rgba(16, 16, 16, 0.9)',
   color: 'white',
   padding: '20px',
   zIndex: 999,
@@ -213,21 +212,24 @@ const filterOptionStyles: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   marginTop: '5px',
-  cursor: 'pointer', // Allows clicking on the label to toggle the checkbox
+  cursor: 'pointer',
 };
 
 const filterLabelStyles: React.CSSProperties = {
-  marginLeft: '5px',
-  color: 'white', // White text color
-  cursor: 'pointer', // Makes the label clickable
+  marginLeft: '10px', 
+  color: 'white',
+  cursor: 'pointer',
 };
 
 const checkboxStyles: React.CSSProperties = {
-  accentColor: 'white', // White checkboxes for visibility
+  width: '20px', // Increased size for better visibility on mobile
+  height: '20px', // Increased size for better visibility on mobile
+  accentColor: '#fff', // White color for visibility
   cursor: 'pointer',
 };
 
 export default Header;
+
 
 
 
