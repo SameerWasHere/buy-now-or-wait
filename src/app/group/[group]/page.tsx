@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import ProductRow from '@/app/ProductRow';
 import { useParams } from 'next/navigation';
+import { Analytics } from "@vercel/analytics/react"
 
 type Product = {
   id: number;
