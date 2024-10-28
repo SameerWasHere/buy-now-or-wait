@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <header style={headerStyles}>
-      <h1 style={titleStyles}>Buy Now or Later</h1>
+      <h1 style={titleStyles}>Should I Buy That Today?</h1>
       <div style={searchContainerStyles}>
         <input
           type="text"

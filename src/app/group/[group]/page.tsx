@@ -165,7 +165,7 @@ const calculateStatus = (
     percentage = (avgCycle - releasedDaysAgo) / avgCycle;
   }
 
-  if (percentage > 0.75) return 'Buy Now';
+  if (percentage > 0.75) return 'Buy That Today';
   if (percentage > 0.5) return 'Okay Buy';
   if (percentage > 0.25) return 'Wait';
   return "Don't Buy";

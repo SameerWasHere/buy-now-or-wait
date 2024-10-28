@@ -159,7 +159,7 @@ const infoValueStyle: React.CSSProperties = {
 
 const getStatusColor = (status: string): string => {
   switch (status) {
-    case 'Buy Now':
+    case 'Buy That Today':
       return '#39b54a';
     case 'Okay Buy':
       return '#b6d957';
