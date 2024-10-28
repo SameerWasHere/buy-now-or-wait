@@ -47,6 +47,7 @@ const titleStyles: React.CSSProperties = {
   margin: 0,
   fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', // Responsive font size
   whiteSpace: 'nowrap',
+  fontWeight: 'bold', // Make the header bold
   flexShrink: 0, // Prevents shrinking of the title
 };
 
@@ -69,5 +70,6 @@ const searchInputStyles: React.CSSProperties = {
 };
 
 export default Header;
+
 
 
