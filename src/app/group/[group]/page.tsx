@@ -1,4 +1,3 @@
-// src/app/group/[group]/page.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -94,7 +93,7 @@ const GroupPage: React.FC = () => {
           calculateExpectedUpgradeInDays(currentProduct.expected_date)
         )}
         group={currentProduct.group}
-        overrideTextColor="black" // Add prop to ensure text stays black
+        overrideTextColor="black"
       />
 
       {/* Display related products with upgraded_after bars */}
@@ -102,11 +101,13 @@ const GroupPage: React.FC = () => {
         {relatedProducts.length > 0 ? (
           relatedProducts.map((product) => (
             <div key={product.id} style={productItemStyles}>
-              {/* Product Name */}
-              <span style={productNameStyles}>{product.name}</span>
+              {/* Product Name Container */}
+              <div style={productNameContainerStyles}>
+                <span style={productNameStyles}>{product.name}</span>
+              </div>
 
-              {/* Progress Bar */}
-              <div style={upgradeBarContainerStyles}>
+              {/* Progress Bar Container */}
+              <div style={progressBarContainerStyles}>
                 <div style={upgradeBarBackgroundStyles}>
                   <div
                     style={{
@@ -117,7 +118,7 @@ const GroupPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Upgraded After Info */}
+              {/* Upgraded After Info Container */}
               <div style={upgradeInfoContainerStyles}>
                 <span style={upgradeLabelStyles}>upgraded after</span>
                 <span style={upgradeNumberStyles}>{product.upgraded_after}</span>
@@ -176,18 +177,16 @@ const groupPageStyles: React.CSSProperties = {
 };
 
 const responsiveHeaderStyles: React.CSSProperties = {
-  fontSize: 'clamp(0.8rem, 4.2vw, 2.5rem)', // More aggressive shrinking
+  fontSize: 'clamp(0.8rem, 4.2vw, 2.5rem)',
   fontWeight: 'bold',
-  color: 'black', // Always black
+  color: 'black',
   marginBottom: '20px',
   textAlign: 'center',
-  whiteSpace: 'nowrap', // Ensures the text stays in one line
-  overflow: 'hidden', // Hides overflow
-  paddingLeft: '1px', // Minimal padding
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  paddingLeft: '1px',
   paddingRight: '1px',
 };
-
-
 
 const productListStyles: React.CSSProperties = {
   marginTop: '30px',
@@ -201,10 +200,26 @@ const productItemStyles: React.CSSProperties = {
   gap: '10px',
 };
 
+const productNameContainerStyles: React.CSSProperties = {
+  flex: '1 1 15%',
+  maxWidth: '150px', // Limit max width to avoid excessive spacing
+  minWidth: '100px',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+};
+
+const progressBarContainerStyles: React.CSSProperties = {
+  flex: '2 1 70%', // Adjust flex to take up more space
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+};
+
 const productNameStyles: React.CSSProperties = {
   fontWeight: 'bold',
-  fontSize: '1.2rem',
-  color: 'black', // Always black
+  fontSize: 'clamp(0.8rem, 1.2vw, 1.2rem)',
+  color: 'black',
 };
 
 const upgradeInfoContainerStyles: React.CSSProperties = {
@@ -224,14 +239,7 @@ const upgradeLabelStyles: React.CSSProperties = {
 const upgradeNumberStyles: React.CSSProperties = {
   fontWeight: 'bold',
   fontSize: '1rem',
-  color: 'black', // Always black
-};
-
-const upgradeBarContainerStyles: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  flex: '1',
-  margin: '0 10px',
+  color: 'black',
 };
 
 const upgradeBarBackgroundStyles: React.CSSProperties = {
@@ -248,6 +256,9 @@ const upgradeBarStyles: React.CSSProperties = {
 };
 
 export default GroupPage;
+
+
+
 
 
 
