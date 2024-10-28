@@ -98,37 +98,38 @@ const GroupPage: React.FC = () => {
 
       {/* Display related products with upgraded_after bars */}
       <div style={productListStyles}>
-        {relatedProducts.length > 0 ? (
-          relatedProducts.map((product) => (
-            <div key={product.id} style={productItemStyles}>
-              {/* Product Name Container */}
-              <div style={productNameContainerStyles}>
-                <span style={productNameStyles}>{product.name}</span>
-              </div>
+      {relatedProducts.length > 0 ? (
+  relatedProducts.map((product) => (
+    <div key={product.id} style={productItemStyles}>
+      {/* Product Name Container */}
+      <div style={productNameContainerStyles}>
+        <span style={productNameStyles}>{product.name}</span>
+      </div>
 
-              {/* Progress Bar Container */}
-              <div style={progressBarContainerStyles}>
-                <div style={upgradeBarBackgroundStyles}>
-                  <div
-                    style={{
-                      ...upgradeBarStyles,
-                      width: `${(product.upgraded_after! / maxUpgradeAfter) * 100}%`,
-                    }}
-                  />
-                </div>
-              </div>
+      {/* Progress Bar Container */}
+      <div style={progressBarContainerStyles}>
+        <div style={upgradeBarBackgroundStyles}>
+          <div
+            style={{
+              ...upgradeBarStyles,
+              width: `${(product.upgraded_after! / maxUpgradeAfter) * 100}%`,
+            }}
+          />
+        </div>
+      </div>
 
-              {/* Upgraded After Info Container */}
-              <div style={upgradeInfoContainerStyles}>
-                <span style={upgradeLabelStyles}>upgraded after</span>
-                <span style={upgradeNumberStyles}>{product.upgraded_after}</span>
-                <span style={upgradeLabelStyles}>days</span>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No related products with upgrade info found in this group.</p>
-        )}
+      {/* Upgraded After Info Container */}
+      <div style={upgradeInfoContainerStyles}>
+        <span style={upgradeLabelNoWrapStyles}>upgraded after</span>
+        <span style={upgradeNumberStyles}>{product.upgraded_after}</span>
+        <span style={upgradeLabelStyles}>days</span>
+      </div>
+    </div>
+  ))
+) : (
+  <p>No related products with upgrade info found in this group.</p>
+)}
+
       </div>
     </div>
   );
@@ -254,6 +255,14 @@ const upgradeBarStyles: React.CSSProperties = {
   height: '10px',
   backgroundColor: '#4caf50',
 };
+
+const upgradeLabelNoWrapStyles: React.CSSProperties = {
+  fontSize: '0.8rem',
+  color: '#555',
+  whiteSpace: 'nowrap', // Prevents text from breaking into two lines
+};
+
+
 
 export default GroupPage;
 
