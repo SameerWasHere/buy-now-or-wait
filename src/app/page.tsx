@@ -107,13 +107,21 @@ const Page: React.FC = () => {
 
         {/* Pagination Controls */}
         <div style={paginationStyles}>
-          <button onClick={prevPage} disabled={currentPage === 1}>
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            style={currentPage === 1 ? disabledButtonStyles : buttonStyles}
+          >
             Previous
           </button>
-          <span>
+          <span style={textStyles}>
             Page {currentPage} of {totalPages}
           </span>
-          <button onClick={nextPage} disabled={currentPage === totalPages}>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            style={currentPage === totalPages ? disabledButtonStyles : buttonStyles}
+          >
             Next
           </button>
         </div>
@@ -150,7 +158,30 @@ const paginationStyles: React.CSSProperties = {
   gap: '10px',
 };
 
+const buttonStyles: React.CSSProperties = {
+  backgroundColor: '#e0e0e0',
+  color: 'black',
+  padding: '10px 15px',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  fontSize: '1rem',
+};
+
+const disabledButtonStyles: React.CSSProperties = {
+  ...buttonStyles,
+  backgroundColor: '#ccc', // Grey background for disabled state
+  color: '#666', // Grey text for disabled state
+  cursor: 'not-allowed', // Change cursor to 'not-allowed'
+};
+
+const textStyles: React.CSSProperties = {
+  color: 'black',
+  fontSize: '1rem',
+};
+
 export default Page;
+
 
 
 
