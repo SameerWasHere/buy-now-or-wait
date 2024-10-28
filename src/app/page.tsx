@@ -26,11 +26,13 @@ const Page: React.FC = () => {
   const RESULTS_PER_PAGE = 10;
 
   useEffect(() => {
-    // Fetch products from API endpoint
+    // Fetch all products from API endpoint
     fetch('/api/products')
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data.filter((product: Product) => product.avg_cycle !== null));
+        // Filter products with non-null avg_cycle
+        const filteredProducts = data.filter((product: Product) => product.avg_cycle !== null);
+        setProducts(filteredProducts);
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
@@ -101,6 +103,7 @@ const Page: React.FC = () => {
               avgCycle={avgCycle}
               expectedUpgradeInDays={expectedUpgradeIn}
               status={status}
+              group={product.group} // Add group prop here
             />
           );
         })}
@@ -170,9 +173,9 @@ const buttonStyles: React.CSSProperties = {
 
 const disabledButtonStyles: React.CSSProperties = {
   ...buttonStyles,
-  backgroundColor: '#ccc', // Grey background for disabled state
-  color: '#666', // Grey text for disabled state
-  cursor: 'not-allowed', // Change cursor to 'not-allowed'
+  backgroundColor: '#ccc',
+  color: '#666',
+  cursor: 'not-allowed',
 };
 
 const textStyles: React.CSSProperties = {

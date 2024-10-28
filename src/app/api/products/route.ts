@@ -11,13 +11,14 @@ const pool = new Pool({
 export async function GET() {
   try {
     // Query to fetch all products from the PostgreSQL database
-    const result = await pool.query('SELECT * FROM products WHERE avg_cycle IS NOT NULL');
+    const result = await pool.query('SELECT * FROM products');
     return NextResponse.json(result.rows);
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
   }
 }
+
 
 
 
