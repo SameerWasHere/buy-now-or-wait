@@ -1,4 +1,3 @@
-// src/app/page.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -21,12 +20,14 @@ type Product = {
 const Page: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const RESULTS_PER_PAGE = 10;
 
+  // Fetch all products from API and set available brands/types
   useEffect(() => {
-    // Fetch all products from API endpoint
     fetch('/api/products')
       .then((response) => response.json())
       .then((data) => {
@@ -39,16 +40,14 @@ const Page: React.FC = () => {
       });
   }, []);
 
-  const calculateReleasedDaysAgo = (releaseDate: string | null): number => {
-    if (!releaseDate) return 0;
-    const release = new Date(releaseDate);
-    const today = new Date();
-    return Math.floor((today.getTime() - release.getTime()) / (1000 * 60 * 60 * 24));
-  };
+  // Filter products based on search term, selected brands, and selected types
+  const filteredProducts = products.filter((product) => {
+    const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
+    const matchesType = selectedTypes.length === 0 || selectedTypes.includes(product.type);
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    return matchesSearchTerm && matchesBrand && matchesType;
+  });
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(filteredProducts.length / RESULTS_PER_PAGE);
@@ -73,13 +72,35 @@ const Page: React.FC = () => {
     }
   };
 
+  // Function to apply filters and reset pagination
+  const applyFilters = () => {
+    setCurrentPage(1);
+  };
+
+  const calculateReleasedDaysAgo = (releaseDate: string | null): number => {
+    if (!releaseDate) return 0;
+    const release = new Date(releaseDate);
+    const today = new Date();
+    return Math.floor((today.getTime() - release.getTime()) / (1000 * 60 * 60 * 24));
+  };
+
   return (
     <>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Header
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        brands={[...new Set(products.map((product) => product.brand))]} // Extract unique brands
+        types={[...new Set(products.map((product) => product.type))]} // Extract unique types
+        selectedBrands={selectedBrands}
+        setSelectedBrands={setSelectedBrands}
+        selectedTypes={selectedTypes}
+        setSelectedTypes={setSelectedTypes}
+        applyFilters={applyFilters}
+      />
       <main
         style={{
           backgroundColor: '#f7f7f7',
-          paddingTop: '80px',
+          paddingTop: '120px', // Increased to accommodate filter dropdowns
           paddingRight: '20px',
           paddingBottom: '20px',
           paddingLeft: '20px',
@@ -103,7 +124,7 @@ const Page: React.FC = () => {
               avgCycle={avgCycle}
               expectedUpgradeInDays={expectedUpgradeIn}
               status={status}
-              group={product.group} // Add group prop here
+              group={product.group}
             />
           );
         })}
@@ -164,7 +185,7 @@ const paginationStyles: React.CSSProperties = {
 const buttonStyles: React.CSSProperties = {
   backgroundColor: '#e0e0e0',
   color: 'black',
-  padding: '10px 15px',
+  padding: '5px 10px', // Reduced vertical padding for narrower height
   border: '1px solid #ccc',
   borderRadius: '5px',
   cursor: 'pointer',
@@ -184,6 +205,7 @@ const textStyles: React.CSSProperties = {
 };
 
 export default Page;
+
 
 
 

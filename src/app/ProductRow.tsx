@@ -133,10 +133,14 @@ const sectionStylesInline: React.CSSProperties = {
 };
 
 const productNameStyle: React.CSSProperties = {
-  fontSize: '1.5rem',
+  fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', // Shrinks between 1rem and 1.5rem based on screen width
   fontWeight: 'bold',
   margin: '0',
+  whiteSpace: 'nowrap', // Keeps the name in a single line
+  overflow: 'hidden', // Hides overflow
+  textOverflow: 'ellipsis', // Adds "..." if the text is too long
 };
+
 
 const imageStyles: React.CSSProperties = {
   objectFit: 'contain',
