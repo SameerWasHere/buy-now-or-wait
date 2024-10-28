@@ -182,7 +182,7 @@ const filterButtonContainerStyles: React.CSSProperties = {
 
 const filterButtonStyles: React.CSSProperties = {
   padding: '4px 10px',
-  backgroundColor: 'rgba(16, 16, 16, 0.9)', 
+  backgroundColor: 'rgba(16, 16, 16, 0.9)',
   color: 'white',
   border: 'none',
   borderRadius: '4px',
@@ -216,19 +216,22 @@ const filterOptionStyles: React.CSSProperties = {
 };
 
 const filterLabelStyles: React.CSSProperties = {
-  marginLeft: '10px', 
+  marginLeft: '10px',
   color: 'white',
   cursor: 'pointer',
 };
 
 const checkboxStyles: React.CSSProperties = {
-  width: '20px', // Increased size for better visibility on mobile
-  height: '20px', // Increased size for better visibility on mobile
-  accentColor: '#fff', // White color for visibility
+  width: '20px',
+  height: '20px',
+  accentColor: '#fff',
   cursor: 'pointer',
+  WebkitAppearance: 'checkbox', // Ensures visibility on iOS
+  appearance: 'checkbox', // Ensures visibility on modern browsers
 };
 
 export default Header;
+
 
 
 
