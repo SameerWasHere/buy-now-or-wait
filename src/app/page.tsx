@@ -1,3 +1,4 @@
+// src/app/page.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -26,12 +27,10 @@ const Page: React.FC = () => {
 
   const RESULTS_PER_PAGE = 10;
 
-  // Fetch all products from API and set available brands/types
   useEffect(() => {
     fetch('/api/products')
       .then((response) => response.json())
       .then((data) => {
-        // Filter products with non-null avg_cycle
         const filteredProducts = data.filter((product: Product) => product.avg_cycle !== null);
         setProducts(filteredProducts);
       })
@@ -40,7 +39,6 @@ const Page: React.FC = () => {
       });
   }, []);
 
-  // Filter products based on search term, selected brands, and selected types
   const filteredProducts = products.filter((product) => {
     const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand);
@@ -49,32 +47,23 @@ const Page: React.FC = () => {
     return matchesSearchTerm && matchesBrand && matchesType;
   });
 
-  // Calculate the total number of pages
   const totalPages = Math.ceil(filteredProducts.length / RESULTS_PER_PAGE);
 
-  // Get products for the current page
   const currentProducts = filteredProducts.slice(
     (currentPage - 1) * RESULTS_PER_PAGE,
     currentPage * RESULTS_PER_PAGE
   );
 
-  // Handle going to the next page
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // Handle going to the previous page
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  };
-
-  // Function to apply filters and reset pagination
-  const applyFilters = () => {
-    setCurrentPage(1);
   };
 
   const calculateReleasedDaysAgo = (releaseDate: string | null): number => {
@@ -89,13 +78,12 @@ const Page: React.FC = () => {
       <Header
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        brands={[...new Set(products.map((product) => product.brand))]} // Extract unique brands
-        types={[...new Set(products.map((product) => product.type))]} // Extract unique types
+        brands={[...new Set(products.map((product) => product.brand))]}
+        types={[...new Set(products.map((product) => product.type))]}
         selectedBrands={selectedBrands}
         setSelectedBrands={setSelectedBrands}
         selectedTypes={selectedTypes}
         setSelectedTypes={setSelectedTypes}
-        applyFilters={applyFilters}
       />
       <main
         style={{

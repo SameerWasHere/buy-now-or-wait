@@ -12,7 +12,6 @@ type HeaderProps = {
   selectedTypes: string[];
   setSelectedBrands: (brands: string[]) => void;
   setSelectedTypes: (types: string[]) => void;
-  applyFilters: () => void;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -24,7 +23,6 @@ const Header: React.FC<HeaderProps> = ({
   selectedTypes,
   setSelectedBrands,
   setSelectedTypes,
-  applyFilters,
 }) => {
   const [showBrandFilter, setShowBrandFilter] = useState(false);
   const [showTypeFilter, setShowTypeFilter] = useState(false);
@@ -35,12 +33,12 @@ const Header: React.FC<HeaderProps> = ({
 
   const toggleBrandFilter = () => {
     setShowBrandFilter(!showBrandFilter);
-    if (showTypeFilter) setShowTypeFilter(false); // Close type filter if open
+    if (showTypeFilter) setShowTypeFilter(false);
   };
 
   const toggleTypeFilter = () => {
     setShowTypeFilter(!showTypeFilter);
-    if (showBrandFilter) setShowBrandFilter(false); // Close brand filter if open
+    if (showBrandFilter) setShowBrandFilter(false);
   };
 
   const handleBrandChange = (brand: string) => {
