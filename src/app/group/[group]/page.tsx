@@ -1,3 +1,4 @@
+// src/app/group/[group]/page.tsx
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -175,14 +176,18 @@ const groupPageStyles: React.CSSProperties = {
 };
 
 const responsiveHeaderStyles: React.CSSProperties = {
-  fontSize: 'clamp(1rem, 4vw, 2.5rem)', // Fluid, responsive header size
+  fontSize: 'clamp(0.8rem, 4.2vw, 2.5rem)', // More aggressive shrinking
   fontWeight: 'bold',
   color: 'black', // Always black
-  marginBottom: '30px',
+  marginBottom: '20px',
   textAlign: 'center',
-  whiteSpace: 'nowrap', // Keep the text inline
-  overflow: 'hidden',
+  whiteSpace: 'nowrap', // Ensures the text stays in one line
+  overflow: 'hidden', // Hides overflow
+  paddingLeft: '1px', // Minimal padding
+  paddingRight: '1px',
 };
+
+
 
 const productListStyles: React.CSSProperties = {
   marginTop: '30px',
@@ -243,6 +248,7 @@ const upgradeBarStyles: React.CSSProperties = {
 };
 
 export default GroupPage;
+
 
 
 
