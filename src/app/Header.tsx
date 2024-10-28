@@ -224,11 +224,13 @@ const filterLabelStyles: React.CSSProperties = {
 const checkboxStyles: React.CSSProperties = {
   width: '20px',
   height: '20px',
-  accentColor: '#fff',
+  accentColor: '#4caf50', // Green accent color for better contrast
+  backgroundColor: 'white', // White background for the checkbox
   cursor: 'pointer',
-  WebkitAppearance: 'checkbox', // Ensures visibility on iOS
-  appearance: 'checkbox', // Ensures visibility on modern browsers
+  WebkitAppearance: 'checkbox',
+  appearance: 'checkbox',
 };
+
 
 export default Header;
 
