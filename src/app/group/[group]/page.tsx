@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import ProductRow from '@/app/ProductRow';
-import { useParams } from 'next/navigation';
-
+import { useParams, useRouter } from 'next/navigation';
 
 type Product = {
   id: number;
@@ -18,6 +17,7 @@ type Product = {
 
 const GroupPage: React.FC = () => {
   const params = useParams();
+  const router = useRouter(); // Use useRouter to navigate back to home
   const groupParam = params?.group;
 
   // Decode the group parameter to handle spaces
@@ -77,6 +77,11 @@ const GroupPage: React.FC = () => {
 
   if (!currentProduct) return <div>No main product found for this group.</div>;
 
+  // Handle "Home" button click
+  const goToHomePage = () => {
+    router.push('/');
+  };
+
   return (
     <div style={groupPageStyles}>
       <h1 style={responsiveHeaderStyles}>Should you buy {group} now or wait?</h1>
@@ -99,38 +104,42 @@ const GroupPage: React.FC = () => {
 
       {/* Display related products with upgraded_after bars */}
       <div style={productListStyles}>
-      {relatedProducts.length > 0 ? (
-  relatedProducts.map((product) => (
-    <div key={product.id} style={productItemStyles}>
-      {/* Product Name Container */}
-      <div style={productNameContainerStyles}>
-        <span style={productNameStyles}>{product.name}</span>
+        {relatedProducts.length > 0 ? (
+          relatedProducts.map((product) => (
+            <div key={product.id} style={productItemStyles}>
+              {/* Product Name Container */}
+              <div style={productNameContainerStyles}>
+                <span style={productNameStyles}>{product.name}</span>
+              </div>
+
+              {/* Progress Bar Container */}
+              <div style={progressBarContainerStyles}>
+                <div style={upgradeBarBackgroundStyles}>
+                  <div
+                    style={{
+                      ...upgradeBarStyles,
+                      width: `${(product.upgraded_after! / maxUpgradeAfter) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Upgraded After Info Container */}
+              <div style={upgradeInfoContainerStyles}>
+                <span style={upgradeLabelNoWrapStyles}>upgraded after</span>
+                <span style={upgradeNumberStyles}>{product.upgraded_after}</span>
+                <span style={upgradeLabelStyles}>days</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No related products with upgrade info found in this group.</p>
+        )}
       </div>
 
-      {/* Progress Bar Container */}
-      <div style={progressBarContainerStyles}>
-        <div style={upgradeBarBackgroundStyles}>
-          <div
-            style={{
-              ...upgradeBarStyles,
-              width: `${(product.upgraded_after! / maxUpgradeAfter) * 100}%`,
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Upgraded After Info Container */}
-      <div style={upgradeInfoContainerStyles}>
-        <span style={upgradeLabelNoWrapStyles}>upgraded after</span>
-        <span style={upgradeNumberStyles}>{product.upgraded_after}</span>
-        <span style={upgradeLabelStyles}>days</span>
-      </div>
-    </div>
-  ))
-) : (
-  <p>No related products with upgrade info found in this group.</p>
-)}
-
+      {/* Home Button */}
+      <div style={buttonContainerStyles}>
+        <button onClick={goToHomePage} style={homeButtonStyles}>Home</button>
       </div>
     </div>
   );
@@ -204,7 +213,7 @@ const productItemStyles: React.CSSProperties = {
 
 const productNameContainerStyles: React.CSSProperties = {
   flex: '1 1 15%',
-  maxWidth: '150px', // Limit max width to avoid excessive spacing
+  maxWidth: '150px',
   minWidth: '100px',
   display: 'flex',
   justifyContent: 'flex-start',
@@ -212,7 +221,7 @@ const productNameContainerStyles: React.CSSProperties = {
 };
 
 const progressBarContainerStyles: React.CSSProperties = {
-  flex: '2 1 70%', // Adjust flex to take up more space
+  flex: '2 1 70%',
   display: 'flex',
   justifyContent: 'flex-start',
   alignItems: 'center',
@@ -260,12 +269,31 @@ const upgradeBarStyles: React.CSSProperties = {
 const upgradeLabelNoWrapStyles: React.CSSProperties = {
   fontSize: '0.8rem',
   color: '#555',
-  whiteSpace: 'nowrap', // Prevents text from breaking into two lines
+  whiteSpace: 'nowrap',
+};
+
+const buttonContainerStyles: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '30px',
+};
+
+const homeButtonStyles: React.CSSProperties = {
+  padding: '10px 20px',
+  backgroundColor: '#d3d3d3', // Changed to a lighter grey
+  color: 'black', // Adjusted text color for better contrast
+  border: 'none',
+  borderRadius: '5px',
+  fontSize: '1rem',
+  cursor: 'pointer',
+  transition: 'background-color 0.3s',
 };
 
 
 
 export default GroupPage;
+
+
 
 
 
