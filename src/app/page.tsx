@@ -25,7 +25,7 @@ const Page: React.FC = () => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const RESULTS_PER_PAGE = 10;
+  const RESULTS_PER_PAGE = 20;
 
   useEffect(() => {
     fetch('/api/products')
